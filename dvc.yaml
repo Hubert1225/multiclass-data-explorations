@@ -1,0 +1,5 @@
+stages:
+  load:
+    cmd: poetry run python .\scripts\load.py wine
+    deps:
+    - .\scripts\load.py
