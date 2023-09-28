@@ -35,8 +35,8 @@ stages:
       size: 12261
     - path: ./scripts/train_test_divide.py
       hash: md5
-      md5: 83c64d40f404ebfa749db4584ec6cbdf
-      size: 808
+      md5: 3001451ccdc0420ceb37d09de568f268
+      size: 809
     - path: ./src/constants.py
       hash: md5
       md5: 77a67e0c69c5b27334d953ab1b7a80eb
@@ -53,13 +53,13 @@ stages:
       params.yaml:
         wine.random_seed: 123
         wine.stratify: true
-        wine.test_frac: 0.25
+        wine.test_frac: 0.2
     outs:
     - path: ./data/processed/wine_test.csv
       hash: md5
-      md5: 04026f959aea60ad9b412cf9324ab220
-      size: 3228
+      md5: 9e675c7a3562ab3df9f10c6bf188b8b5
+      size: 2616
     - path: ./data/processed/wine_train.csv
       hash: md5
-      md5: 35c235ca8d91e355bff6b50ab3a8de46
-      size: 9210
+      md5: c1adb267b087bb64ff2a05f1e9ca02a9
+      size: 9822
