@@ -8,9 +8,21 @@ stages:
       md5: 409db8ad71c9fe8e059aad842de17ea4
       size: 383
   load@wine:
-    cmd: poetry run python .\scripts\load.py wine
+    cmd: poetry run python ./scripts/load.py wine
     deps:
-    - path: .\scripts\load.py
+    - path: ./scripts/load.py
       hash: md5
-      md5: 409db8ad71c9fe8e059aad842de17ea4
+      md5: 4bb56e0a4ec33f81bd74e5df05651051
       size: 383
+  preprocess@wine:
+    cmd: poetry run python ./scripts/preprocess.py wine
+    deps:
+    - path: ./scripts/preprocess.py
+      hash: md5
+      md5: b63a3ca3fc3cd6e4723b8c30ee70e352
+      size: 556
+    outs:
+    - path: ./data/processed/wine.csv
+      hash: md5
+      md5: 721feafda5e794af9abd5bac9b8327d4
+      size: 12261
