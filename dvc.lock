@@ -19,10 +19,47 @@ stages:
     deps:
     - path: ./scripts/preprocess.py
       hash: md5
-      md5: 3b8560350af19674fd010daf81284e4d
+      md5: da39b11010ee249f15078025743a5084
       size: 514
     outs:
     - path: ./data/processed/wine.csv
       hash: md5
       md5: 721feafda5e794af9abd5bac9b8327d4
       size: 12261
+  train-test-divide@wine:
+    cmd: poetry run python ./scripts/train_test_divide.py wine
+    deps:
+    - path: ./data/processed/wine.csv
+      hash: md5
+      md5: 721feafda5e794af9abd5bac9b8327d4
+      size: 12261
+    - path: ./scripts/train_test_divide.py
+      hash: md5
+      md5: 83c64d40f404ebfa749db4584ec6cbdf
+      size: 808
+    - path: ./src/constants.py
+      hash: md5
+      md5: 77a67e0c69c5b27334d953ab1b7a80eb
+      size: 115
+    - path: ./src/params.py
+      hash: md5
+      md5: e77c81fa25dfac3f31f2974fa61bb6f4
+      size: 123
+    - path: ./src/randomness.py
+      hash: md5
+      md5: c0cdeed79fb2fcc37696a5c92ee9395d
+      size: 777
+    params:
+      params.yaml:
+        wine.random_seed: 123
+        wine.stratify: true
+        wine.test_frac: 0.25
+    outs:
+    - path: ./data/processed/wine_test.csv
+      hash: md5
+      md5: 04026f959aea60ad9b412cf9324ab220
+      size: 3228
+    - path: ./data/processed/wine_train.csv
+      hash: md5
+      md5: 35c235ca8d91e355bff6b50ab3a8de46
+      size: 9210
