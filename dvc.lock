@@ -7,3 +7,10 @@ stages:
       hash: md5
       md5: 409db8ad71c9fe8e059aad842de17ea4
       size: 383
+  load@wine:
+    cmd: poetry run python .\scripts\load.py wine
+    deps:
+    - path: .\scripts\load.py
+      hash: md5
+      md5: 409db8ad71c9fe8e059aad842de17ea4
+      size: 383
