@@ -4,9 +4,9 @@ import sys
 import numpy as np
 import pandas as pd
 
+from constants import RAW_DATA_DIR, PROCESSED_DATA_DIR
+
 DATASET = sys.argv[1]
-RAW_DATA_DIR = os.path.join("data", "raw")
-PROCESSED_DATA_DIR = os.path.join("data", "processed")
 RESULT_PATH = os.path.join(PROCESSED_DATA_DIR, DATASET + '.csv')
 
 
