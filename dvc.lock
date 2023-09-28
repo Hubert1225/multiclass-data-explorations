@@ -12,15 +12,15 @@ stages:
     deps:
     - path: ./scripts/load.py
       hash: md5
-      md5: 4bb56e0a4ec33f81bd74e5df05651051
-      size: 383
+      md5: 5684c1bc030a99f72a03dabece557751
+      size: 377
   preprocess@wine:
     cmd: poetry run python ./scripts/preprocess.py wine
     deps:
     - path: ./scripts/preprocess.py
       hash: md5
-      md5: b63a3ca3fc3cd6e4723b8c30ee70e352
-      size: 556
+      md5: 3b8560350af19674fd010daf81284e4d
+      size: 514
     outs:
     - path: ./data/processed/wine.csv
       hash: md5
