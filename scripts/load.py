@@ -5,7 +5,7 @@ import numpy as np
 from sklearn.datasets import load_wine
 
 DATASET = sys.argv[1]
-RAW_DATA_DIR = os.path.join('..', 'data', 'raw')
+RAW_DATA_DIR = os.path.join('data', 'raw')
 
 
 if DATASET == 'wine':
