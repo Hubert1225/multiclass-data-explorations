@@ -1,0 +1,8 @@
+stages:
+  load:
+    foreach:
+      - wine
+    do:
+      cmd: poetry run python .\scripts\load.py ${item}
+      deps:
+      - .\scripts\load.py
