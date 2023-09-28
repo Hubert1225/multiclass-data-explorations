@@ -16,4 +16,6 @@ ENV POETRY_VIRTUALENVS_CREATE=false
 RUN pip install poetry
 RUN poetry install --no-ansi --no-root
 
+ENV PYTHONPATH='/code/src/'
+
 USER $USERNAME
