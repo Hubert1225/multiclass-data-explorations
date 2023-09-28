@@ -3,6 +3,15 @@ stages:
     foreach:
       - wine
     do:
-      cmd: poetry run python .\scripts\load.py ${item}
+      cmd: poetry run python ./scripts/load.py ${item}
       deps:
-      - .\scripts\load.py
+      - ./scripts/load.py
+  preprocess:
+    foreach:
+      - wine
+    do:
+      cmd: poetry run python ./scripts/preprocess.py ${item}
+      deps:
+        - ./scripts/preprocess.py
+      outs:
+        - ./data/processed/${item}.csv
