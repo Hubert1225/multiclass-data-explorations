@@ -1,4 +1,4 @@
 wine:
   random_seed: 123
-  test_frac: 0.25
+  test_frac: 0.2
   stratify: True
