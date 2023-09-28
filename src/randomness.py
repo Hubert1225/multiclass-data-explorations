@@ -14,7 +14,7 @@ def get_random_seed(dataset_name: str) -> int:
         int: the random seed value
 
     """
-    return params[dataset_name]['random_seed']
+    return params[dataset_name]["random_seed"]
 
 
 def get_random_generator(dataset_name: str) -> np.random.Generator:
