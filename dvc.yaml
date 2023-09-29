@@ -15,3 +15,21 @@ stages:
         - ./scripts/preprocess.py
       outs:
         - ./data/processed/${item}.csv
+  train-test-divide:
+    foreach:
+      - wine
+    do:
+      cmd: poetry run python ./scripts/train_test_divide.py ${item}
+      deps:
+        - ./scripts/train_test_divide.py
+        - ./src/constants.py
+        - ./src/params.py
+        - ./src/randomness.py
+        - ./data/processed/${item}.csv
+      params:
+        - ${item}.random_seed
+        - ${item}.test_frac
+        - ${item}.stratify
+      outs:
+        - ./data/processed/${item}_train.csv
+        - ./data/processed/${item}_test.csv
