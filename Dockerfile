@@ -18,4 +18,6 @@ RUN poetry install --no-ansi --no-root
 
 ENV PYTHONPATH='/code/src/'
 
+EXPOSE 8888
+
 USER $USERNAME
