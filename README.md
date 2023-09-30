@@ -15,6 +15,14 @@ Reproduce the pipeline in the Docker container:
 docker run --user "1000:1000" --name multiclass-data-explorations --rm -v .:/code multiclass-data-explorations poetry run dvc repro
 ```
 
+Run Jupyter Lab in the Docker container:
+
+```shell
+docker run --user "1000:1000" --name multiclass-data-explorations --rm -v .:/code -p 8888:8888 multiclass-data-explorations poetry run jupyter lab --ip 0.0.0.0 --no-browser
+```
+
+and go to one of links that appear in terminal.
+
 ## Datasets used as examples
 
 _Wine_
