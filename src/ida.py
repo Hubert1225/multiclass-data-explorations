@@ -41,7 +41,7 @@ def missing_values_chisquare_test(column: pd.Series, classes: pd.Series) -> floa
     class_labels = pd.Series(classes.unique())
     # if there are no missing values, return 'NA'
     if missing_classes.size == 0:
-        return 'NA'
+        return "NA"
     # calculate expected freqs of classes among missing values
     classes_dist_all = class_labels.map(
         lambda x: (classes == x).sum() / classes.size
@@ -64,19 +64,21 @@ def classes_normality_test(column: pd.Series, classes: pd.Series) -> dict[int, f
 
 def describe_column(column: pd.Series, classes: pd.Series, dataset_name: str) -> str:
     rng = get_random_generator(dataset_name)
-    desc = ''
-    desc += f'\nDtype: {column.dtype}'
-    desc += f'\nRandomly chosen exemplary vals:\n{column[rng.choice(column.size, size=10)]}'
-    desc += f'\nNumber of unique values: {column.unique().size}'
-    desc += f'\nMinimum: {column.min()}'
-    desc += f'\n1. quartile: {column.quantile(q=0.25)}'
-    desc += f'\nMedian: {column.median()}'
-    desc += f'\n3. quartile: {column.quantile(q=0.75)}'
-    desc += f'\nMaximum: {column.max()}'
-    desc += f'\nMissing values percentage: {missing_values_percent(column):.3f} %'
-    desc += f'\nChi-square test p-value: {missing_values_chisquare_test(column=column, classes=classes)}'
-    desc += f'\nShapiro-Wilk test p-values for classes:'
+    desc = ""
+    desc += f"\nDtype: {column.dtype}"
+    desc += (
+        f"\nRandomly chosen exemplary vals:\n{column[rng.choice(column.size, size=10)]}"
+    )
+    desc += f"\nNumber of unique values: {column.unique().size}"
+    desc += f"\nMinimum: {column.min()}"
+    desc += f"\n1. quartile: {column.quantile(q=0.25)}"
+    desc += f"\nMedian: {column.median()}"
+    desc += f"\n3. quartile: {column.quantile(q=0.75)}"
+    desc += f"\nMaximum: {column.max()}"
+    desc += f"\nMissing values percentage: {missing_values_percent(column):.3f} %"
+    desc += f"\nChi-square test p-value: {missing_values_chisquare_test(column=column, classes=classes)}"
+    desc += f"\nShapiro-Wilk test p-values for classes:"
     classes_pvalues = classes_normality_test(column=column, classes=classes)
     for cl, pvalue in classes_pvalues.items():
-        desc += f'\n\tclass {cl}: {pvalue:.3f}'
+        desc += f"\n\tclass {cl}: {pvalue:.3f}"
     return desc
