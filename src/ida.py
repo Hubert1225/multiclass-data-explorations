@@ -1,5 +1,7 @@
 import pandas as pd
-from scipy.stats import chisquare
+from scipy.stats import chisquare, shapiro
+
+from randomness import get_random_generator
 
 
 def missing_values_percent(column: pd.Series) -> float:
@@ -46,3 +48,31 @@ def missing_values_chisquare_test(column: pd.Series, classes: pd.Series) -> floa
         lambda x: (missing_classes == x).sum()
     ).to_numpy()
     return chisquare(f_obs=classes_freq_missing, f_exp=classes_freq_expected).pvalue
+
+
+def classes_normality_test(column: pd.Series, classes: pd.Series) -> dict[int, float]:
+    classes_pvalues: dict[int, float] = {}
+    for cl in classes.unique():
+        class_samples = column[classes == cl]
+        classes_pvalues[cl] = shapiro(class_samples).pvalue
+    return classes_pvalues
+
+
+def describe_column(column: pd.Series, classes: pd.Series, dataset_name: str) -> str:
+    rng = get_random_generator(dataset_name)
+    desc = ''
+    desc += f'\nDtype: {column.dtype}'
+    desc += f'\nRandomly chosen exemplary vals: {column[rng.choice(column.size, size=10)]}'
+    desc += f'\nNumber of unique values: {column.unique().size}'
+    desc += f'\nMinimum: {column.min()}'
+    desc += f'\n1. quartile: {column.quantile(q=0.25)}'
+    desc += f'\nMedian: {column.median()}'
+    desc += f'\n3. quartile: {column.quantile(q=0.75)}'
+    desc += f'\nMaximum: {column.max()}'
+    desc += f'\nMissing values percentage: {missing_values_percent(column):.3f} %'
+    desc += f'\nChi-square test p-value: {missing_values_chisquare_test(column=column, classes=classes)}'
+    desc += f'\nShapiro-Wilk test p-values for classes:'
+    classes_pvalues = classes_normality_test(column=column, classes=classes)
+    for cl, pvalue in classes_pvalues.items():
+        desc += f'\n\tclass {cl}: {pvalue:.3f}'
+    return desc
