@@ -19,7 +19,7 @@ def missing_values_percent(column: pd.Series) -> float:
     return column.isna().sum() * 100.0 / column.size
 
 
-def missing_values_chisquare_test(column: pd.Series, classes: pd.Series) -> float:
+def missing_values_chisquare_test(column: pd.Series, classes: pd.Series) -> float | str:
     """Checks if classes distribution among samples
     where value in given column is missing is the same as
     classes distribution in entire data.
@@ -33,11 +33,15 @@ def missing_values_chisquare_test(column: pd.Series, classes: pd.Series) -> floa
         classes: class labels for consequtive samples
 
     Returns:
-        float: the pvalue of the chi-square test
+        float | str: the pvalue of the chi-square test if there are missing values
+            or 'NA' string otherwise
 
     """
     missing_classes = classes[column.isna()]
     class_labels = pd.Series(classes.unique())
+    # if there are no missing values, return 'NA'
+    if missing_classes.size == 0:
+        return 'NA'
     # calculate expected freqs of classes among missing values
     classes_dist_all = class_labels.map(
         lambda x: (classes == x).sum() / classes.size
