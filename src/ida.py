@@ -66,7 +66,7 @@ def describe_column(column: pd.Series, classes: pd.Series, dataset_name: str) ->
     rng = get_random_generator(dataset_name)
     desc = ''
     desc += f'\nDtype: {column.dtype}'
-    desc += f'\nRandomly chosen exemplary vals: {column[rng.choice(column.size, size=10)]}'
+    desc += f'\nRandomly chosen exemplary vals:\n{column[rng.choice(column.size, size=10)]}'
     desc += f'\nNumber of unique values: {column.unique().size}'
     desc += f'\nMinimum: {column.min()}'
     desc += f'\n1. quartile: {column.quantile(q=0.25)}'
