@@ -55,6 +55,21 @@ def missing_values_chisquare_test(column: pd.Series, classes: pd.Series) -> floa
 
 
 def classes_normality_test(column: pd.Series, classes: pd.Series) -> dict[int, float]:
+    """Performs statistical test for each class that column values
+    of samples from this class are normally distributed.
+
+    For each class, column values are retrieved and then
+    the Shapiro-Wilk test for normality is performed.
+
+    Args:
+        column: values of column for consecutive samples
+        classes: class labels for consequtive samples
+
+    Returns:
+        dict[int, float]: dict in which keys are class labels
+            and values are corresponding p-values from the Shapiro-Wilk test
+
+    """
     classes_pvalues: dict[int, float] = {}
     for cl in classes.unique():
         class_samples = column[classes == cl]
@@ -63,6 +78,19 @@ def classes_normality_test(column: pd.Series, classes: pd.Series) -> dict[int, f
 
 
 def describe_column(column: pd.Series, classes: pd.Series, dataset_name: str) -> str:
+    """Given a data column and corresponding class labels,
+    builds a description string for the column.
+
+    Args:
+        column: values of column for consecutive samples
+        classes: class labels for consequtive samples
+        dataset_name: name of the dataset
+
+    Returns:
+        str: multiline description string containing information about
+            values of the column with taking into account the class labels
+
+    """
     rng = get_random_generator(dataset_name)
     desc = ""
     desc += f"\nDtype: {column.dtype}"
