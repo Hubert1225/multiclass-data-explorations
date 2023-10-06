@@ -26,4 +26,5 @@ and go to one of links that appear in terminal.
 ## Datasets used as examples
 
 _Wine_
-Loaded using scikit-learn: https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_wine.html
+Loaded using scikit-learn: https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_wine.html,
+which is the copy of UCI ML Wine Data Set dataset https://archive.ics.uci.edu/ml/machine-learning-databases/wine/wine.data
