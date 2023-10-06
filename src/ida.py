@@ -98,13 +98,18 @@ def describe_column(column: pd.Series, classes: pd.Series, dataset_name: str) ->
         f"\nRandomly chosen exemplary vals:\n{column[rng.choice(column.size, size=10)]}"
     )
     desc += f"\nNumber of unique values: {column.unique().size}"
+    desc += '\n'
     desc += f"\nMinimum: {column.min()}"
+    desc += f"\n10. centile: {column.quantile(q=0.1)}"
     desc += f"\n1. quartile: {column.quantile(q=0.25)}"
     desc += f"\nMedian: {column.median()}"
     desc += f"\n3. quartile: {column.quantile(q=0.75)}"
+    desc += f"\n90. centile: {column.quantile(q=0.9)}"
     desc += f"\nMaximum: {column.max()}"
+    desc += '\n'
     desc += f"\nMissing values percentage: {missing_values_percent(column):.3f} %"
     desc += f"\nChi-square test p-value: {missing_values_chisquare_test(column=column, classes=classes)}"
+    desc += '\n'
     desc += f"\nShapiro-Wilk test p-values for classes:"
     classes_pvalues = classes_normality_test(column=column, classes=classes)
     for cl, pvalue in classes_pvalues.items():
