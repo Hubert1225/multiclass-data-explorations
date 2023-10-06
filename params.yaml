@@ -2,3 +2,4 @@ wine:
   random_seed: 123
   test_frac: 0.2
   stratify: True
+  max_missing_percent: 0.5
