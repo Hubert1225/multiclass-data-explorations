@@ -17,13 +17,13 @@ def get_column_dropper(columns_to_drop: list[str]) -> ColumnTransformer:
     """
     return ColumnTransformer(
         transformers=[
-            ('column_dropper', 'drop', columns_to_drop),
+            ("column_dropper", "drop", columns_to_drop),
         ]
     )
 
 
 def get_columns_to_drop(X: pd.DataFrame, dataset_name: str) -> list[str]:
-    max_missing_percent = params[dataset_name].get('max_missing_percent')
+    max_missing_percent = params[dataset_name].get("max_missing_percent")
     columns_to_drop = []
     for column in X.columns:
         if missing_values_percent(X[column]) > max_missing_percent:
@@ -33,7 +33,9 @@ def get_columns_to_drop(X: pd.DataFrame, dataset_name: str) -> list[str]:
 
 def get_missing_values_pipeline(X: pd.DataFrame, dataset_name: str) -> Pipeline:
     columns_to_drop = get_columns_to_drop(X=X, dataset_name=dataset_name)
-    return Pipeline([
-        ('impute', SimpleImputer(strategy='median')),
-        ('drop_columns', get_column_dropper(columns_to_drop))
-    ])
+    return Pipeline(
+        [
+            ("impute", SimpleImputer(strategy="median")),
+            ("drop_columns", get_column_dropper(columns_to_drop)),
+        ]
+    )
